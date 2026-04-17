@@ -31,7 +31,7 @@ const News = (props) => {
   const updateNews = async (newPage = page) => {
     if (props.setProgress) props.setProgress(10);
 
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&page=${newPage}&pageSize=${props.pageSize}&apiKey=4bd6867c8dae4c29972657e4f65cb7aa`;
+   const url = `https://gnews.io/api/v4/top-headlines?country=pk&lang=en&max=${props.pageSize}&apikey=f90e08e8c35a46cb91b3e24594869b8e`;
 
     setLoading(true);
     let data = await fetch(url);
@@ -56,7 +56,7 @@ const News = (props) => {
     
     const nextPage = page + 1;
     setPage(nextPage);
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&page=${nextPage}&pageSize=${props.pageSize}&apiKey=4bd6867c8dae4c29972657e4f65cb7aa`;
+    const url = `https://gnews.io/api/v4/top-headlines?country=pk&lang=en&max=${props.pageSize}&apikey=f90e08e8c35a46cb91b3e24594869b8e`;
 //eslint disable-next-line
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -86,9 +86,9 @@ const News = (props) => {
                 <NewsItem
                   title={element.title || ''}
                   descrption={element.description || ''}
-                  imageurl={element.urlToImage}
+                  imageurl={element.image}
                   NewsUrl={element.url}
-                  author={element.author}
+                  author={element.source?.name}
                   date={element.publishedAt}
                   source={element.source?.name || 'Unknown'}
                 />
